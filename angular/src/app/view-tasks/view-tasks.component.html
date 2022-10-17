@@ -1,0 +1,44 @@
+<h1>Tasks</h1>
+
+<label>
+  <input type="checkbox" [(ngModel)]="showDoneTasks" />
+  Show Done Tasks
+</label>
+
+<label>
+  <select name="customerType" [(ngModel)]="assignedPerson">
+    <option>{{defaultAssignedPersonSelection}}</option>
+    <option *ngFor="let name of assignedPersons">{{name}}</option>
+  </select>
+  Assigned Person
+</label>
+
+<button type="button" (click)="refresh()">Refresh</button>
+
+<button type="button" (click)="addEmptyTask()">Add Task</button>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Assigned Person</th>
+    <th>Done</th>
+  </tr>
+
+  <tr *ngFor="let task of tasks; let taskIx = index">
+    <td>
+      <input type="text" [(ngModel)]="task.description" />
+    </td>
+    <td>
+      <select name="customerType" [(ngModel)]="task.assignedPerson">
+        <option></option>
+        <option *ngFor="let name of assignedPersons">{{name}}</option>
+      </select>
+    </td>
+    <td>
+      <input type="checkbox" [(ngModel)]="task.done" />
+    </td>
+    <td>
+      <button type="button" (click)="deleteTask(taskIx)">Delete</button>
+    </td>
+  </tr>
+</table>
