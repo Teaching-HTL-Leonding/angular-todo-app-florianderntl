@@ -8,7 +8,7 @@
 <label>
   <select name="customerType" [(ngModel)]="assignedPerson">
     <option>{{defaultAssignedPersonSelection}}</option>
-    <option *ngFor="let name of assignedPersons">{{name}}</option>
+    <option *ngFor="let name of people">{{name}}</option>
   </select>
   Assigned Person
 </label>
@@ -16,6 +16,10 @@
 <button type="button" (click)="refresh()">Refresh</button>
 
 <button type="button" (click)="addEmptyTask()">Add Task</button>
+
+<input type="text" [(ngModel)]="newPerson">
+
+<button (click)="onNewPersonAction()">Add New Person</button>
 
 <table>
   <tr>
@@ -31,7 +35,7 @@
     <td>
       <select name="customerType" [(ngModel)]="task.assignedPerson">
         <option></option>
-        <option *ngFor="let name of assignedPersons">{{name}}</option>
+        <option *ngFor="let name of people">{{name}}</option>
       </select>
     </td>
     <td>

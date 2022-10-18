@@ -8,17 +8,20 @@ import { TasksService, Task } from './tasks.service';
 })
 export class ViewTasksComponent {
 
-  public assignedPersons: string[];
+  public people: string[];
   public defaultAssignedPersonSelection: string;
   public showDoneTasks: boolean;
   public assignedPerson: string;
   public tasks!: Task[];
+  public newPerson: string;
 
   constructor(public tasksService: TasksService) {
-    this.assignedPersons = ["Me", "Erik", "Elias"];
+    this.people = ["Me", "Erik", "Elias"];
     this.defaultAssignedPersonSelection = "ALL";
     this.showDoneTasks = true;
     this.assignedPerson = this.defaultAssignedPersonSelection;
+    this.newPerson = "";
+
     this.refresh();
   }
 
@@ -60,5 +63,10 @@ export class ViewTasksComponent {
   public deleteTask(taskIx: number) {
     this.tasksService.deleteTask(taskIx);
     this.refresh();
+  }
+
+  public onNewPersonAction() {
+    this.people.push(this.newPerson);
+    this.newPerson = "";
   }
 }
