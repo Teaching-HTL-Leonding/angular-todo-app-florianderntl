@@ -1,0 +1,47 @@
+#container {
+  margin: 100px 300px;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.card {
+  width: 90%;
+  height: 100px;
+}
+
+.mat-card-title {
+  margin-bottom: 25px;
+}
+
+#formAssignedTo {
+  margin-left: 50px;
+}
+
+#btnRefresh {
+  float: right;
+}
+
+#newPerson {
+  float: right;
+  justify-content: right;
+}
+
+#btnNewPerson {
+  margin-left: 10px;
+}
+
+table {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td, th {
+  padding-right: 50px;
+}
+
+th {
+  font-size: 1.2em;
+}

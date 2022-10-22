@@ -1,48 +1,73 @@
-<h1>Tasks</h1>
+<div id="container">
+  <h1>Tasks</h1>
 
-<label>
-  <input type="checkbox" [(ngModel)]="showDoneTasks" />
-  Show Done Tasks
-</label>
+  <mat-grid-list cols="2" rowHeight="200px">
+    <mat-grid-tile>
+      <mat-card class="card">
+        <mat-card-title>Filter</mat-card-title>
 
-<label>
-  <select name="customerType" [(ngModel)]="assignedPerson">
-    <option>{{defaultAssignedPersonSelection}}</option>
-    <option *ngFor="let name of people">{{name}}</option>
-  </select>
-  Assigned Person
-</label>
+        <div id="card1">
+          <mat-checkbox [(ngModel)]="showDoneTasks">Show done tasks</mat-checkbox>
 
-<button type="button" (click)="refresh()">Refresh</button>
+          <mat-form-field id="formAssignedTo">
+            <mat-label>Show tasks assigned to</mat-label>
 
-<button type="button" (click)="addEmptyTask()">Add Task</button>
+            <select matNativeControl [(ngModel)]="assignedPerson">
+              <option>{{defaultAssignedPersonSelection}}</option>
+              <option *ngFor="let name of people">{{name}}</option>
+            </select>
+          </mat-form-field>
 
-<input type="text" [(ngModel)]="newPerson">
+          <button id="btnRefresh" type="button" mat-raised-button color="primary" (click)="refresh()">Refresh</button>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
 
-<button (click)="onNewPersonAction()">Add New Person</button>
+    <mat-grid-tile>
+      <mat-card class="card">
+        <mat-card-title>Modify</mat-card-title>
 
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Assigned Person</th>
-    <th>Done</th>
-  </tr>
+        <button type="button" mat-raised-button color="primary" (click)="addEmptyTask()">Add Task</button>
 
-  <tr *ngFor="let task of tasks; let taskIx = index">
-    <td>
-      <input type="text" [(ngModel)]="task.description" />
-    </td>
-    <td>
-      <select name="customerType" [(ngModel)]="task.assignedPerson">
-        <option></option>
-        <option *ngFor="let name of people">{{name}}</option>
-      </select>
-    </td>
-    <td>
-      <input type="checkbox" [(ngModel)]="task.done" />
-    </td>
-    <td>
-      <button type="button" (click)="deleteTask(taskIx)">Delete</button>
-    </td>
-  </tr>
-</table>
+        <div id="newPerson">
+          <mat-form-field appearance="fill">
+            <mat-label>Add new person</mat-label>
+            <input matInput [(ngModel)]="newPerson" required #newPersonInput="ngModel" />
+          </mat-form-field>
+
+          <button id="btnNewPerson" mat-raised-button color="primary" (click)="onNewPersonAction()" [disabled]="!newPersonInput.valid">Add</button>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <table>
+    <tr>
+      <th>Description</th>
+      <th>Assigned to</th>
+      <th>Done</th>
+    </tr>
+
+    <tr *ngFor="let task of tasks; let taskIx = index">
+      <td>
+        <mat-form-field>
+          <input matInput [(ngModel)]="task.description" />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <select matNativeControl [(ngModel)]="task.assignedPerson" value="No assigned person">
+            <option></option>
+            <option *ngFor="let name of people">{{name}}</option>
+          </select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-checkbox [(ngModel)]="task.done"></mat-checkbox>
+      </td>
+      <td>
+        <button type="button" mat-raised-button color="warn" (click)="deleteTask(taskIx)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>
